@@ -27,6 +27,15 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
+@client.event
+async def on_message(message):
+    if message.content.startswith(command_prefix):
+        # do shit
+        # this is old way of filtering but should really
+        # just use discord command feature instead
+        # will have to look into that
+    return  
+
 def main():
     setup_tokens(tokensfile)
     client.run(discord_token)
