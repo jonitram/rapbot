@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+import asyncio
 import discord
+from discord.ext import commands
 
 # TODO:
 # just copied over sbb logic but
@@ -11,13 +13,18 @@ discord_token = None
 
 client = discord.Client()
 
-command_prefix = '.rap'
+bot = commands.Bot(command_prefix='.rb ')
 
 def setup_tokens(filename):
     global discord_token
     tokens = open(filename, "r")
     discord_token = tokens.readline().rstrip()
     tokens.close()
+    return
+
+@bot.command()
+async def rap(ctx, *args):
+    await ctx.send('-'.join(args))
     return
 
 @client.event
@@ -27,14 +34,14 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-@client.event
-async def on_message(message):
-    if message.content.startswith(command_prefix):
+# @client.event
+# async1 def on_message(message):
+    # if message.content.startswith(command_prefix):
         # do shit
         # this is old way of filtering but should really
         # just use discord command feature instead
         # will have to look into that
-    return  
+    # return  
 
 def main():
     setup_tokens(tokensfile)
