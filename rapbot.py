@@ -11,7 +11,7 @@ from discord.ext import commands
 tokensfile = 'tokens.txt'
 discord_token = None
 
-client = discord.Client()
+# client = discord.Client()
 
 bot = commands.Bot(command_prefix='.rb ')
 
@@ -27,12 +27,12 @@ async def rap(ctx, *args):
     await ctx.send('-'.join(args))
     return
 
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+# @client.event
+# async def on_ready():
+#     print('Logged in as')
+#     print(client.user.name)
+#     print(client.user.id)
+#     print('------')
 
 # @client.event
 # async1 def on_message(message):
@@ -45,6 +45,7 @@ async def on_ready():
 
 def main():
     setup_tokens(tokensfile)
-    client.run(discord_token)
+    bot.run(discord_token)
+    # client.run(discord_token)
 
 if __name__ == "__main__": main()
