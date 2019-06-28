@@ -3,15 +3,8 @@ import asyncio
 import discord
 from discord.ext import commands
 
-# TODO:
-# just copied over sbb logic but
-# should use discord api built in command feature
-# instead of manually filtering for command_prefix
-
 tokensfile = 'tokens.txt'
 discord_token = None
-
-# client = discord.Client()
 
 bot = commands.Bot(command_prefix='.rb ')
 
@@ -24,28 +17,44 @@ def setup_tokens(filename):
 
 @bot.command()
 async def rap(ctx, *args):
-    await ctx.send('-'.join(args))
+    # multiprocess -> spin up background generate raps
+    # store reference for potentially killing later
     return
 
-# @client.event
-# async def on_ready():
-#     print('Logged in as')
-#     print(client.user.name)
-#     print(client.user.id)
-#     print('------')
+# @bot.command()
+# async def kill(ctx):
+    # if raps process reference != None
+    #   kill it
+    # else
+    #   let user know nothing was being generated
+    # return
+    
+# @bot.command()
+# async def say(ctx):
+    # if check precons:
+        # (check precons -> user in voice channel, raps file exists, nothing currently playing -> voice reference == None)
+        # set voice reference
+        # connect
+        # play
+        # stop
+        # disconnect
+    # else
+        # let user know what precon they failed
+    # return
 
-# @client.event
-# async1 def on_message(message):
-    # if message.content.startswith(command_prefix):
-        # do shit
-        # this is old way of filtering but should really
-        # just use discord command feature instead
-        # will have to look into that
-    # return  
+# should be awaited
+# @bot.command()
+# async def stop(ctx):
+#     if voice reference != None:
+#         (follow sbb logic)
+#         voice reference stop
+#         disconnect
+#         voice reference = None
+#     else
+#         nothing was playing
 
 def main():
     setup_tokens(tokensfile)
     bot.run(discord_token)
-    # client.run(discord_token)
 
 if __name__ == "__main__": main()
