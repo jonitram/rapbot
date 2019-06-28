@@ -1,2 +1,5 @@
 asyncio==3.4.3
 discord==1.0.1
+markovify==0.7.1
+pronouncing==0.1.5
+Unidecode==1.0.22
