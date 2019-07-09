@@ -8,6 +8,8 @@ discord_token = None
 
 bot = commands.Bot(command_prefix='.rb ')
 
+voice_reference = None
+
 def setup_tokens(filename):
     global discord_token
     tokens = open(filename, "r")
@@ -17,8 +19,24 @@ def setup_tokens(filename):
 
 @bot.command()
 async def rap(ctx, *args):
+    global voice_reference
     # multiprocess -> spin up background generate raps
     # store reference for potentially killing later
+    voice_reference = asyncio.create_task(test(ctx))
+    return
+
+@bot.command()
+async def kill(ctx):
+    global voice_reference
+    voice_reference.cancel()
+    voice_reference = None
+    await ctx.send('process has been killed')
+    return
+
+async def test(ctx):
+    while True:
+        await ctx.send('pulse')
+        await asyncio.sleep(10)
     return
 
 # @bot.command()
